@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGTech | Soluciones Tecnológicas</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0a0c12;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* ===== FONDO ANIMADO ===== */
+.animated-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background: linear-gradient(135deg, #0a0c12 0%, #0f1219 50%, #0b0e16 100%);
+}
+
+.animated-bg::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: radial-gradient(circle at 30% 40%, rgba(37, 99, 235, 0.12), transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.1), transparent 50%);
+  animation: bgPulse 12s ease-in-out infinite;
+}
+
+.animated-bg::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 60px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 60px);
+  pointer-events: none;
+}
+
+@keyframes bgPulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+.floating-particles {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(37, 99, 235, 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(40px);
+  animation: floatParticle 20s infinite ease-in-out;
+}
+
+@keyframes floatParticle {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.3; }
+  33% { transform: translateY(-30px) translateX(20px) scale(1.1); opacity: 0.5; }
+  66% { transform: translateY(20px) translateX(-15px) scale(0.9); opacity: 0.4; }
+}
+
+/* ===== NAVBAR ===== */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1rem 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(10, 12, 18, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(37, 99, 235, 0.2);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+nav.scrolled {
+  padding: 0.7rem 8%;
+  background: rgba(10, 12, 18, 0.95);
+  border-bottom-color: rgba(37, 99, 235, 0.4);
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #3b82f6, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.logo span {
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  color: #fff;
+}
+
+.nav-text {
+  font-weight: 500;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 120px 8% 80px;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #ffffff, #94a3b8, #3b82f6);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 4s linear infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.hero p {
+  max-width: 680px;
+  font-size: 1.2rem;
+  color: #94a3b8;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.btn-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  border-radius: 40px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: white;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.btn-outline {
+  background: rgba(255,255,255,0.05);
+  color: #e2e8f0;
+  border: 1px solid rgba(59,130,246,0.4);
+  backdrop-filter: blur(4px);
+}
+
+.btn-outline:hover {
+  background: rgba(59,130,246,0.15);
+  border-color: #3b82f6;
+  transform: translateY(-3px);
+}
+
+/* ===== SECCIÓN SERVICIOS ===== */
+.section {
+  padding: 80px 8%;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header h2 {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #f1f5f9, #94a3b8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.section-header p {
+  color: #64748b;
+  margin-top: 0.8rem;
+  font-size: 1.1rem;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: rgba(18, 22, 32, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 28px;
+  padding: 1.8rem;
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.1), transparent);
+  transition: left 0.6s ease;
+}
+
+.card:hover::before {
+  left: 100%;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59,130,246,0.2);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 1.2rem;
+}
+
+.card h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.card-desc {
+  color: #94a3b8;
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.card-price {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #3b82f6;
+  margin: 1rem 0;
+  letter-spacing: -0.5px;
+}
+
+.card-price small {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #64748b;
+}
+
+.card-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 40px;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.card-btn:hover {
+  transform: scale(1.02);
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  box-shadow: 0 5px 15px rgba(37,99,235,0.4);
+}
+
+/* ===== PLAN MENSUAL DESTACADO ===== */
+.plan-card {
+  background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(139,92,246,0.1));
+  border: 1px solid rgba(59,130,246,0.4);
+  border-radius: 32px;
+  padding: 2.5rem;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.plan-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(59,130,246,0.2), transparent 70%);
+  animation: rotateGlow 10s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotateGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.plan-badge {
+  display: inline-block;
+  background: #2563eb;
+  padding: 0.3rem 1rem;
+  border-radius: 40px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+
+.plan-card h3 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.plan-price {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #3b82f6;
+  margin: 0.8rem 0;
+}
+
+.plan-price span {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #94a3b8;
+}
+
+.plan-features {
+  list-style: none;
+  margin: 1.8rem 0;
+}
+
+.plan-features li {
+  margin: 0.8rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #cbd5e1;
+}
+
+.plan-features i {
+  color: #22c55e;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 3rem 8%;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  color: #64748b;
+}
+
+/* ===== WHATSAPP FLOAT ===== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  z-index: 100;
+  animation: pulseWhatsApp 2s infinite;
+}
+
+@keyframes pulseWhatsApp {
+  0%, 100% { box-shadow: 0 6px 20px rgba(37,211,102,0.3); transform: scale(1); }
+  50% { box-shadow: 0 8px 30px rgba(37,211,102,0.6); transform: scale(1.05); }
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 25px rgba(37,211,102,0.5);
+}
+
+.whatsapp-float i {
+  font-size: 2rem;
+  color: white;
+}
+
+/* ===== ANIMACIONES SCROLL ===== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 5%;
+  }
+  .cards-grid {
+    gap: 1.2rem;
+  }
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+  .plan-price {
+    font-size: 2.2rem;
+  }
+  .whatsapp-float {
+    width: 50px;
+    height: 50px;
+    bottom: 20px;
+    right: 20px;
+  }
+  .whatsapp-float i {
+    font-size: 1.6rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="animated-bg"></div>
+<div class="floating-particles" id="particles"></div>
+
+<nav id="navbar">
+  <div class="logo">DG<span>Tech</span></div>
+  <div class="nav-text"><i class="fas fa-microchip"></i> Soluciones inteligentes</div>
+</nav>
+
+<section class="hero">
+  <h1>Servicios de Computadoras<br>y Sistemas Windows</h1>
+  <p>Optimización, reparación, automatización y soporte técnico profesional para usuarios y negocios. Tecnología de alto nivel al alcance de un clic.</p>
+  <div class="btn-group">
+    <a class="btn btn-primary" id="heroBtn"><i class="fab fa-whatsapp"></i> Solicitar Servicio</a>
+    <a class="btn btn-outline" href="#servicios"><i class="fas fa-arrow-down"></i> Ver Servicios</a>
+  </div>
+</section>
+
+<section id="servicios" class="section fade-up">
+  <div class="section-header">
+    <h2><i class="fas fa-cogs"></i> Nuestros Servicios</h2>
+    <p>Soluciones profesionales con precios competitivos en RD$</p>
+  </div>
+  <div class="cards-grid" id="servicesContainer"></div>
+</section>
+
+<section class="section fade-up">
+  <div class="plan-card">
+    <div class="plan-badge">⭐ RECOMENDADO</div>
+    <h3>Soporte Técnico Mensual</h3>
+    <div class="plan-price">RD$1,600 <span>/mes</span></div>
+    <p style="color:#94a3b8;">Asistencia remota ilimitada, mantenimiento preventivo y soporte prioritario</p>
+    <ul class="plan-features">
+      <li><i class="fas fa-check-circle"></i> Asistencia remota 24/7</li>
+      <li><i class="fas fa-check-circle"></i> Optimización periódica</li>
+      <li><i class="fas fa-check-circle"></i> Instalación de software</li>
+      <li><i class="fas fa-check-circle"></i> Consultoría técnica continua</li>
+    </ul>
+    <a class="card-btn" id="monthlyPlanBtn"><i class="fab fa-whatsapp"></i> Contratar Plan Mensual</a>
+  </div>
+</section>
+
+<footer>
+  <p><i class="far fa-copyright"></i> 2026 DGTech - Innovación y confianza tecnológica</p>
+</footer>
+
+<a class="whatsapp-float" id="waFloat" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+// Configuración de WhatsApp
+const WHATSAPP_NUMBER = "18092521979";
+
+function wa(serviceName) {
+  const messages = {
+    "SERVICIOS_GENERALES": "Hola DGTech. Vi su página web y me gustaría recibir información sobre los servicios disponibles.",
+    "Optimización Windows": "Hola DGTech. Me interesa el servicio de Optimización de Windows (RD$1,100). Mi computadora está funcionando lenta y me gustaría recibir más información.",
+    "Eliminación de Virus": "Hola DGTech. Me interesa el servicio de Eliminación de Virus (RD$1,300). Quisiera una evaluación y más detalles.",
+    "Instalación Windows": "Hola DGTech. Me interesa el servicio de Instalación de Windows (RD$1,800). ¿Podrían indicarme el proceso?",
+    "Recuperación de Archivos": "Hola DGTech. Me interesa el servicio de Recuperación de Archivos (RD$1,400). Necesito recuperar información importante.",
+    "Instalación de Software": "Hola DGTech. Me interesa el servicio de Instalación y Configuración de Software (RD$1,100).",
+    "Automatización Python": "Hola DGTech. Me interesa el servicio de Automatización con Python (RD$1,800). Tengo tareas que me gustaría automatizar.",
+    "Bots Discord": "Hola DGTech. Me interesa el servicio de Desarrollo de Bots para Discord (RD$1,500).",
+    "Páginas Web": "Hola DGTech. Me interesa el servicio de Desarrollo de Páginas Web (RD$2,200). Quisiera recibir más información.",
+    "Formularios Automáticos": "Hola DGTech. Me interesa el servicio de Formularios Automáticos (RD$1,600).",
+    "Soporte Técnico": "Hola DGTech. Me interesa el servicio de Soporte Técnico (RD$1,300). Necesito asistencia con mi equipo.",
+    "Plan Mensual": "Hola DGTech. Me interesa el Plan Mensual de Soporte Técnico (RD$1,600/mes). Me gustaría recibir más información sobre la suscripción."
+  };
+  const msg = messages[serviceName] || messages["SERVICIOS_GENERALES"];
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+}
+
+// Data de servicios
+const services = [
+  { icon: "⚡", title: "Optimización Windows", price: "RD$1,100", desc: "Mejora el rendimiento general, reduce tiempos de carga y optimiza el sistema." },
+  { icon: "🛡️", title: "Eliminación de Virus", price: "RD$1,300", desc: "Eliminación de malware, spyware y amenazas que afectan tu equipo." },
+  { icon: "🖥️", title: "Instalación Windows", price: "RD$1,800", desc: "Instalación limpia de Windows con configuración y optimización inicial." },
+  { icon: "💾", title: "Recuperación de Archivos", price: "RD$1,400", desc: "Recuperación de documentos, fotografías y archivos importantes." },
+  { icon: "📦", title: "Instalación de Software", price: "RD$1,100", desc: "Instalación y configuración de programas y herramientas de trabajo." },
+  { icon: "🐍", title: "Automatización Python", price: "RD$1,800", desc: "Automatización de tareas repetitivas para ahorrar tiempo y aumentar productividad." },
+  { icon: "🤖", title: "Bots Discord", price: "RD$1,500", desc: "Desarrollo de bots personalizados para moderación y automatización." },
+  { icon: "🌐", title: "Páginas Web", price: "RD$2,200", desc: "Landing pages modernas, profesionales y optimizadas para conversiones." },
+  { icon: "📋", title: "Formularios Automáticos", price: "RD$1,600", desc: "Formularios inteligentes para recopilar información y automatizar procesos." },
+  { icon: "🔧", title: "Soporte Técnico", price: "RD$1,300", desc: "Asistencia remota y solución de problemas técnicos." }
+];
+
+// Renderizar tarjetas de servicios
+const container = document.getElementById("servicesContainer");
+services.forEach(service => {
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `
+    <div class="card-icon">${service.icon}</div>
+    <h3>${service.title}</h3>
+    <p class="card-desc">${service.desc}</p>
+    <div class="card-price">${service.price} <small>RD$</small></div>
+    <a class="card-btn" href="${wa(service.title)}" target="_blank">
+      <i class="fab fa-whatsapp"></i> Reservar Servicio
+    </a>
+  `;
+  container.appendChild(card);
+});
+
+// Asignar eventos a los botones principales
+document.getElementById("heroBtn").href = wa("SERVICIOS_GENERALES");
+document.getElementById("waFloat").href = wa("SERVICIOS_GENERALES");
+document.getElementById("monthlyPlanBtn").href = wa("Plan Mensual");
+
+// Crear partículas flotantes animadas
+function createParticles() {
+  const particlesContainer = document.getElementById("particles");
+  for (let i = 0; i < 30; i++) {
+    const particle = document.createElement("div");
+    particle.classList.add("particle");
+    const size = Math.random() * 300 + 80;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.top = `${Math.random() * 100}%`;
+    particle.style.animationDelay = `${Math.random() * 20}s`;
+    particle.style.animationDuration = `${15 + Math.random() * 20}s`;
+    particle.style.opacity = Math.random() * 0.2;
+    particlesContainer.appendChild(particle);
+  }
+}
+createParticles();
+
+// Scroll animation y navbar efecto
+window.addEventListener("scroll", () => {
+  const navbar = document.getElementById("navbar");
+  if (window.scrollY > 50) {
+    navbar.classList.add("scrolled");
+  } else {
+    navbar.classList.remove("scrolled");
+  }
+
+  // Fade-up elements
+  document.querySelectorAll(".fade-up").forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      el.classList.add("visible");
+    }
+  });
+});
+
+// Forzar visibilidad inicial si ya están visibles
+document.querySelectorAll(".fade-up").forEach(el => {
+  const rect = el.getBoundingClientRect();
+  if (rect.top < window.innerHeight - 100) {
+    el.classList.add("visible");
+  }
+});
+
+// Estilo adicional para íconos de FontAwesome
+const linkFA = document.createElement('link');
+linkFA.rel = 'stylesheet';
+linkFA.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
+document.head.appendChild(linkFA);
+</script>
+</body>
+</html>
